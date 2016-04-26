@@ -1,1 +1,92 @@
-dfsafsf
+<script type="text/javascript" src="https://d14to6y4nub5k1.cloudfront.net/gulp/d75f876caefad248c9b735ae6761a39c4c205490/chs-js-lib/chs.js"></script>
+
+var gridColor = new Color(196, 196, 196); 
+var lineWidth = 3;
+var gridColor = new Color(196, 196, 196); 
+var lineWidth = 3;
+var x = 0;
+var y = 0;
+var mode;
+var darkGray = new Color(111,108,108);
+var grassGreen = new Color(94,157,52);
+var dirtBrown = new Color(117,82,54);
+var x = 0;
+var y = 0;
+
+function start(){
+    setTimer(makeVerticalGrid, 10);
+    setTimer(makeHorizontalGrid, 10);
+    mouseClickMethod(drawSomething);
+	setTimer(makeVerticalGrid, 10);
+    setTimer(makeHorizontalGrid, 10);
+    keyDownMethod(keyDown);
+}
+
+function makeVerticalGrid(){
+    var line = new Line(x ,0, x, getHeight());
+    line.setColor(gridColor);
+    line.setLineWidth(lineWidth);
+    add(line);
+    x += getWidth() / 15;
+    if(x == getWidth()){
+        stopTimer(makeVerticalGrid);
+    }
+}
+
+function makeHorizontalGrid(){
+    var line2 = new Line(0, y, getWidth(), y);
+    line2.setColor(gridColor);
+    line2.setLineWidth(lineWidth);
+    add(line2);
+    y += getWidth() / 15;
+    if(y == getHeight()){
+        stopTimer(makeHorizontalGrid);
+    }
+}
+
+function keyDown(e) {
+	if (e.keyCode == Keyboard.letter('Q')){
+		mode = 1;
+	}
+	if(e.keyCode == Keyboard.letter('W')){
+		mode = 2;
+	}
+}
+
+
+function drawSomething(e){
+	if(mode == 1){
+	    var rect = new Rectangle(getWidth()/15,getWidth()/15);
+	    rect.setPosition(e.getX(), e.getY());
+	    
+	    if(e.getX() /= (getWidth() / 15) * 1 && e.getX() /= (getWidth() / 15) * 2 && e.getX() /= (getWidth() / 15) * 3 && e.getX() /= (getWidth() / 15) * 4 && e.getX() /= (getWidth() / 15) * 5 && e.getX() /= (getWidth() / 15) * 6 && e.getX() /= (getWidth() / 15) * 7 && e.getX() /= (getWidth() / 15) * 8 && e.getX() /= (getWidth() / 15) * 9 && e.getX() /= (getWidth() / 15) * 10 && e.getX() /= (getWidth() / 15) * 11 && e.getX() /= (getWidth() / 15) * 12 && e.getX() /= (getWidth() / 15) * 13 && e.getX() /= (getWidth() / 15) * 14 && e.getX() /= (getWidth() / 15) * 15){
+	        
+	    }
+	    
+	    rect.setColor(darkGray);
+	    add(rect);
+	    var line = new Line(0,0,0,0);
+	    line.setColor(Color.gray);
+	    line.setLineWidth(2);
+	    line.setPosition(e.getX(),e.getY() + getWidth()/30);
+	    line.setEndpoint(e.getX() + getWidth()/15, e.getY() + getWidth()/30);
+	    add(line);
+	    var line2 = new Line(0,0,0,0);
+	    line2.setColor(Color.gray);
+	    line2.setLineWidth(2);
+	    line2.setPosition(e.getX() +getWidth()/30,e.getY() + getWidth()/30);
+	    line2.setEndpoint(e.getX() + getWidth()/30, e.getY() + getWidth()/15);
+	    add(line2);
+	}else if(mode == 2){
+	    var rect1 = new Rectangle(getWidth()/15,getWidth()/15);
+	    rect1.setPosition(e.getX(), e.getY());
+	    rect1.setColor(dirtBrown);
+	    add(rect1);
+	    var grass = new Rectangle(getWidth()/15,getWidth()/60);
+	    grass.setPosition(e.getX(), e.getY());
+	    grass.setColor(grassGreen);
+	    add(grass);
+    }
+}
+
+
